@@ -301,94 +301,6 @@ def prepare_image_for_net3D(img, mean_value=None):
     return img
 
 
-# def loss_test(predictions_csv_path):
-#     df = pandas.read_csv(predictions_csv_path)
-#     df.sort_values(["mx", "pred"], inplace=True, ascending=[False, False])
-#
-#     window = 80
-#     scores = []
-#     for i in range(len(df)):
-#         start = max(i - window, 0)
-#         end = min(i + window, len(df) - 1)
-#         total = 0
-#         count = 0
-#         for j in range(start, end):
-#             if j == i:
-#                 continue
-#             total += df.iloc[j]["class"]
-#             count += 1
-#         avg_value = max(float(total) / float(count), 0.001)
-#         actual_value = df.iloc[i]["class"]
-#         # actual_value = 0
-#         if actual_value == 1:
-#             score = abs(math.log(avg_value))
-#         else:
-#             score = abs(math.log(1 - avg_value))
-#         scores.append(score)
-#         print(str(i).rjust(3), "\t", round(avg_value, 4), "\t", round(score, 4), "\t", round(sum(scores) / len(scores), 4), "\t", df.iloc[i]["name"])
-
-
-def loss_test(predictions_csv_path):
-    df = pandas.read_csv(predictions_csv_path)
-    df = df[df["mx"] >= 0]
-    # df = df.iloc[0::2]
-    df.sort_values(["mx", "pred"], inplace=True, ascending=[False, False])
-    window = 80
-    scores = []
-    for i in range(len(df)):
-        start = max(i - window, 0)
-        end = min(i + window, len(df) - 1)
-        total = 0
-        count = 0
-        for j in range(start, end):
-            if j == i:
-                continue
-            total += df.iloc[j]["class"]
-            count += 1
-        avg_value = max(float(total) / float(count), 0.001)
-        actual_value = df.iloc[i]["class"]
-        # actual_value = 0
-        if actual_value == 1:
-            score = abs(math.log(avg_value))
-        else:
-            score = abs(math.log(1 - avg_value))
-        scores.append(score)
-        print(str(i).rjust(3), "\t", round(avg_value, 4), "\t", round(score, 4), "\t", round(sum(scores) / len(scores), 4), "\t", df.iloc[i]["name"])
-
-
-def loss_submission(predictions_csv_path_tra, predictions_csv_path_sub):
-    df_train = pandas.read_csv(predictions_csv_path_tra)
-    df_train.sort_values(["mx", "pred"], inplace=True, ascending=[False, False])
-
-    df_sub = pandas.read_csv(predictions_csv_path_sub)
-    empty_sub = pandas.read_csv(settings.SUBMISSION_CSV_PATH)
-
-    window =80
-    scores = []
-    # found_index = -1
-    row_no = 0
-    for esub_index, esubrow in empty_sub.iterrows():
-        row_no += 1
-        print(row_no, ": ",  esubrow["id"])
-        sub_row = df_sub.loc[df_sub["name"] == esubrow["id"]]
-        mal_score = sub_row["mx"].values[0]
-        for df_train_index in range(len(df_train)):
-            tr_mal_score = df_train.iloc[df_train_index]["mx"]
-            if tr_mal_score < mal_score:
-                break
-
-        start = max(df_train_index - window, 0)
-        end = min(df_train_index + window, len(df_train) - 1)
-        total = 0
-        count = 0
-        for j in range(start, end):
-            total += df_train.iloc[j]["class"]
-            count += 1
-        avg_value = max(float(total) / float(count), 0.001)
-        empty_sub.loc[esub_index, "cancer"] = avg_value
-    empty_sub.to_csv("c:/tmp/sub.csv")
-
-
 def get_distance(df_row1, df_row2):
     dist = math.sqrt(math.pow(df_row1["coord_x"] - df_row2["coord_x"], 2) + math.pow(df_row1["coord_y"] - df_row2["coord_y"], 2) + math.pow(df_row1["coord_y"] - df_row2["coord_y"], 2))
     return dist
@@ -417,9 +329,4 @@ def get_patient_fold(patient_id, submission_set_neg=False):
     return res
 
 
-if __name__ == "__main__":
-    # pass
-    # 0.438 voor 10
-    loss_test("c:/tmp/tmp.csv")
-    # loss_submission("c:/tmp/tmp20_tra_luna.csv", "c:/tmp/tmp20_sub_luna.csv")
 
