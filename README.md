@@ -30,7 +30,8 @@ Training the 3D convnets will be around 10 hours per piece. The 3 mass detector 
 Once trained or downloaded through the URL the models can be placed in the ./models/ directory.
 From there the nodule detector step3_predict_nodules.py  can be run to detect nodules in a 3d grid per patient. The detected nodules and predicted malignancy are stored per patient in a separate directory. 
 The masses detector can be run through step2_train_mass_segmenter.py and will write a csv with estimated masses per patient.
-Training of submissions, combining submissions for final  submission.
+
+#### Training of submissions, combining submissions for final  submission.
 Based on the per-patient csv’s the masses.csv and other metadata we will train an xgboost model to generate submissions (step4_train_submissions.py). There are 3 levels of submissions. First the per-model submissions. (level1). Different models are combined in level2, and Daniel’s submissions are added. These level 2 submissions will be combined (averaged) into one final submission.
 Below are the different models that will be generated/combined.
 Level 1:
