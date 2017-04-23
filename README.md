@@ -7,11 +7,16 @@ Next to this I used scikit-learn, pydicom, simpleitk, beatifulsoup, opencv and X
 All in all it was quite an engineering effort.
 
 #### General
-The source contains much dead code. Cleaning up 100% was too risky on such short notice.
-The solution relies on manual labels, generated labels and 2 resulting submissions from team member Daniel Hammack. These files are all in this archive and can be put at the location as can be configured in the settings.py. Trained models are also provided through a download url URL
+The source is cleaned up as much as possible. However I was afraid that results would not be 100% reproducible if I changed too much. Therefore some pieces could be a bit cleaner. Also I left in some bugs that I found while cleaning up. (See end of this document),
+
+The solution relies on manual labels, generated labels and 2 resulting submissions from team member Daniel Hammack. These files are all in the "resources" map. All other file location can be configured in the settings.py. The raw patient data must be downloaded from the Kaggle website and the LUNA16 website. 
+
+Trained models are also provided through a download url URL
+
 The solution is a combination of nodule detectors/malignancy regressors. My two parts are trained with LUNA16 data with a mix of positive and negative labels + malignancy info from the LIDC dataset. My second part also uses some manual annotations made on the NDSB3 trainset. Predictions are generated from the raw nodule/malignancy predictions combined with the location information and general “mass” information. Masses are no nodules but big suspicious tissues present in the CT-images. De masses are detected with a U-net trained with manual labels.
-The 3rd and 4th part come from Daniel’s solution. 
-My final solution is a blend of the 4 different part. Blending is done by taking a simple average.
+
+The 3rd and 4th part of te solution come from Daniel Hammack. 
+The final solution is a blend of the 4 different part. Blending is done by taking a simple average.
 
 #### Preprocessing
 First run step1_preprocess_ndsb.py. This will extract all the ndsb dicom files , scale to 1x1x1 mm, and make a directory containing .png slice images. Lung segmentation mask images are also generated. They will be used later in the process for faster predicting.
