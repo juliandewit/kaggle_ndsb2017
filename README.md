@@ -1,6 +1,4 @@
 # kaggle_ndsb2017
-Kaggle datascience bowl 2017
-
 This is the source code for my part of the 2nd place solution to the [National Data Science Bowl 2017](https://www.kaggle.com/c/data-science-bowl-2017/) hosted by Kaggle.com. 
 
 For documenation about the approach go to: http://juliandewit.github.io/kaggle-ndsb2017/
