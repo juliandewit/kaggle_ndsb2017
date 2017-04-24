@@ -38,19 +38,20 @@ The masses detector is already run through the *step2_train_mass_segmenter.py* a
 Based on the per-patient csv’s the masses.csv and other metadata we will train an xgboost model to generate submissions (*step4_train_submissions.py*). There are 3 levels of submissions. First the per-model submissions. (level1). Different models are combined in level2, and Daniel’s submissions are added. These level 2 submissions will be combined (averaged) into one final submission.
 Below are the different models that will be generated/combined.
 
-- Level 1:
+- Level 1:<br>
 Luna16_fs (trained on full luna16 set)<br>
 Luna16_ndsbposneg v1 (trained on luna16 + manual pos/neg labels in ndsb)<br>
 Luna16_ndsbposneg v2 (trained on luna16 + manual pos/neg labels in ndsb)<br>
-2, 3 will be averaged into 1 level 2 model<br>
-
-- Level 2.
-Luna16_fs<br>
-Luna16_ndsbposneg<br>
 Daniel model 1<br>
 Daniel model 2<br>
+posneg, daniel will be averaged into 1 level 2 model<br>
 
-These 4 models will be averaged into 1 *final_submission.csv*
+- Level 2.<br>
+Luna16_fs<br>
+Luna16_ndsbposneg<br>
+Daniel<br><br>
+
+These 3 models will be averaged into 1 *final_submission.csv*
 
 #### Bugs and suggestions.
 First of all. Duringing cleanup I noticed that I missed 10% of the LUNA16 patients because I overlooked subset0. That might be a 100.000 dollar mistake. For reprodicibility reasons I kept the bug in. In settings.py you can adjust the code to also take this subset into account.
