@@ -39,15 +39,35 @@ Based on the per-patient csv’s the masses.csv and other metadata we will train
 Below are the different models that will be generated/combined.
 
 - Level 1:
-Luna16_fs (trained on full luna16 set)
-Luna16_ndsbposneg v1 (trained on luna16 + manual pos/neg labels in ndsb)
-Luna16_ndsbposneg v2 (trained on luna16 + manual pos/neg labels in ndsb)
-2, 3 will be averaged into 1 level 2 model
+Luna16_fs (trained on full luna16 set)<br>
+Luna16_ndsbposneg v1 (trained on luna16 + manual pos/neg labels in ndsb)<br>
+Luna16_ndsbposneg v2 (trained on luna16 + manual pos/neg labels in ndsb)<br>
+2, 3 will be averaged into 1 level 2 model<br>
 
 - Level 2.
-Luna16_fs
-Luna16_ndsbposneg
-Daniel model 1
-Daniel model 2
+Luna16_fs<br>
+Luna16_ndsbposneg<br>
+Daniel model 1<br>
+Daniel model 2<br>
 
 These 4 models will be averaged into 1 *final_submission.csv*
+
+#### Bugs and suggestions.
+First of all. Duringing cleanup I noticed that I missed 10% of the LUNA16 patients because I overlooked subset0. That might be a 100.000 dollar mistake. For reprodicibility reasons I kept the bug in. In settings.py you can adjust the code to also take this subset into account.
+
+Suggestions for improvement would be:
+- Take the 10% extra LUNA16 condidates.
+- Use different blends of the positive and negative labels
+- Other neural network architectures.
+- Etc..
+
+
+
+
+
+
+
+
+
+
+
