@@ -44,7 +44,7 @@ Luna16_ndsbposneg v1 (trained on luna16 + manual pos/neg labels in ndsb)<br>
 Luna16_ndsbposneg v2 (trained on luna16 + manual pos/neg labels in ndsb)<br>
 Daniel model 1<br>
 Daniel model 2<br>
-posneg, daniel will be averaged into 1 level 2 model<br>
+posneg, daniel will be averaged into one level 2 model<br>
 
 - Level 2.<br>
 Luna16_fs<br>
