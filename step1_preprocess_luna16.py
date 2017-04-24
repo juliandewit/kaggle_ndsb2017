@@ -217,7 +217,7 @@ def process_image(src_path):
 
 
 def process_pos_annotations_patient(src_path, patient_id):
-    df_node = pandas.read_csv(settings.LUNA16_RAW_SRC_DIR + "annotations/annotations.csv")
+    df_node = pandas.read_csv("resources/luna16_annotations/annotations.csv")
     dst_dir = settings.LUNA16_EXTRACTED_IMAGE_DIR + "_labels/"
     if not os.path.exists(dst_dir):
         os.mkdir(dst_dir)
@@ -292,7 +292,7 @@ def process_pos_annotations_patient(src_path, patient_id):
 
 
 def process_excluded_annotations_patient(src_path, patient_id):
-    df_node = pandas.read_csv(settings.LUNA16_RAW_SRC_DIR + "annotations/annotations_excluded.csv")
+    df_node = pandas.read_csv("resources/luna16_annotations/annotations_excluded.csv")
     dst_dir = settings.LUNA16_EXTRACTED_IMAGE_DIR + "_labels/"
     if not os.path.exists(dst_dir):
         os.mkdir(dst_dir)
@@ -443,7 +443,7 @@ def process_luna_candidates_patient(src_path, patient_id):
     print("Direction: ", direction)
     assert abs(sum(direction) - 3) < 0.01
 
-    src_df = pandas.read_csv(settings.LUNA16_RAW_SRC_DIR + "annotations/" + "candidates_V2.csv")
+    src_df = pandas.read_csv("resources/luna16_annotations/" + "candidates_V2.csv")
     src_df = src_df[src_df["seriesuid"] == patient_id]
     src_df = src_df[src_df["class"] == 0]
     patient_imgs = helpers.load_patient_images(patient_id, settings.LUNA16_EXTRACTED_IMAGE_DIR, "*_i.png")
@@ -687,7 +687,7 @@ def process_lidc_annotations(only_patient=None, agreement_threshold=0):
     pos_count = 0
     neg_count = 0
     all_lines = []
-    for anno_dir in [d for d in glob.glob(settings.LUNA16_RAW_SRC_DIR + "annotations/*") if os.path.isdir(d)]:
+    for anno_dir in [d for d in glob.glob("resources/luna16_annotations/*") if os.path.isdir(d)]:
         xml_paths = glob.glob(anno_dir + "/*.xml")
         for xml_path in xml_paths:
             print(file_no, ": ",  xml_path)
