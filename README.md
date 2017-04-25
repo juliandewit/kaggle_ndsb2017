@@ -11,7 +11,7 @@ The source is cleaned up as much as possible. However I was afraid that results 
 
 The solution relies on manual labels, generated labels and 2 resulting submissions from team member Daniel Hammack. These files are all in the "resources" map. All other file location can be configured in the settings.py. The raw patient data must be downloaded from the Kaggle website and the LUNA16 website. 
 
-Trained models as provided to Kaggle after phase 1 are also provided through the following download url URL
+Trained models as provided to Kaggle after phase 1 are also provided through the following download: https://retinopaty.blob.core.windows.net/ndsb3/trained_models.rar
 
 The solution is a combination of nodule detectors/malignancy regressors. My two parts are trained with LUNA16 data with a mix of positive and negative labels + malignancy info from the LIDC dataset. My second part also uses some manual annotations made on the NDSB3 trainset. Predictions are generated from the raw nodule/malignancy predictions combined with the location information and general “mass” information. Masses are no nodules but big suspicious tissues present in the CT-images. De masses are detected with a U-net trained with manual labels.
 
@@ -30,7 +30,7 @@ the *step2_train_nodule_detector.py* file. This will train various combinations 
 The mass detector can be trained using *step2_train_mass_segmenter.py*. It trains 3 folds and final models are stored in the models (names) folder. Training the 3D convnets will be around 10 hours per piece. The 3 mass detector folds will take around 8 hours in total
 
 #### Predicting neural nets
-Once trained or downloaded through the URL the models are placed in the ./models/ directory.
+Once trained or downloaded through the url (https://retinopaty.blob.core.windows.net/ndsb3/trained_models.rar) the models are placed in the ./models/ directory.
 From there the nodule detector *step3_predict_nodules.py*  can be run to detect nodules in a 3d grid per patient. The detected nodules and predicted malignancy are stored per patient in a separate directory. 
 The masses detector is already run through the *step2_train_mass_segmenter.py* and will stored a csv with estimated masses per patient.
 
