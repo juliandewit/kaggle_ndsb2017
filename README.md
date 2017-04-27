@@ -1,5 +1,6 @@
 # Kaggle national datascience bowl 2017 2nd place code
 This is the source code for my part of the 2nd place solution to the [National Data Science Bowl 2017](https://www.kaggle.com/c/data-science-bowl-2017/) hosted by Kaggle.com. For documenation about the approach go to: http://juliandewit.github.io/kaggle-ndsb2017/
+Note that this is my part of the code. Daniel's work can be found here: https://github.com/dhammack/DSB2017
 
 #### Dependencies & data
 The solution is built using Keras with a tensorflow backend on windows 64bit.
