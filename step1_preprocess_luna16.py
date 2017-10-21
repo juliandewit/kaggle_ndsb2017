@@ -617,7 +617,7 @@ def process_images(delete_existing=False, only_process_patient=None):
         src_paths = glob.glob(src_dir + "*.mhd")
 
         if only_process_patient is None and True:
-            pool = multiprocessing.Pool(6)
+            pool = multiprocessing.Pool(settings.WORKER_POOL_SIZE)
             pool.map(process_image, src_paths)
         else:
             for src_path in src_paths:
