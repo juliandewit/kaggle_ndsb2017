@@ -105,7 +105,7 @@ def extract_dicom_images(clean_targetdir_first=False, only_patient_id=None):
     if only_patient_id is None:
         dirs = os.listdir(settings.NDSB3_RAW_SRC_DIR)
         if True:
-            pool = Pool(8)
+            pool = Pool(settings.WORKER_POOL_SIZE)
             pool.map(extract_dicom_images_patient, dirs)
         else:
             for dir_entry in dirs:
