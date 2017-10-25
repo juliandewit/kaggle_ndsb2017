@@ -427,6 +427,8 @@ def train_model(holdout, model_type, continue_from=None):
     epoch_div = 1
     epoch_count = 200 if model_type == "masses" else 50
     model.fit_generator(train_gen, len(train_files) / epoch_div, epoch_count, validation_data=holdout_gen, nb_val_samples=len(holdout_files) / epoch_div, callbacks=[checkpoint1, checkpoint2, dumper])
+    if not os.path.exists("models"):
+        os.mkdir("models")
     shutil.copy("workdir/" + model_type +"_model_h" + str(holdout) + "_best.hd5", "models/" + model_type +"_model_h" + str(holdout) + "_best.hd5")
 
 def predict_patients(patients_dir, model_path, holdout, patient_predictions, model_type):
