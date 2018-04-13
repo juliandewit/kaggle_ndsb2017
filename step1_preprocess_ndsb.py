@@ -6,6 +6,7 @@ import cv2  # conda install -c https://conda.anaconda.org/menpo opencv3
 import scipy.misc
 import dicom  # pip install pydicom
 import numpy
+import math
 from multiprocessing import Pool
 
 
